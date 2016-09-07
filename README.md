@@ -6,3 +6,9 @@
 
 [angularjs 2 教程](https://angular.io/docs/js/latest/quickstart.html)
 
+
+git clone 
+
+npm install
+
+npm start
