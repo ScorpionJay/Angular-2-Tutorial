@@ -26,10 +26,13 @@ const HEROES: Hero[] = [
     template: `
     			<h2>{{title}}</h2>
     			<ul class='heroes'>
-    				<li *ngFor="let hero of heroes">
+    				<li *ngFor="let hero of heroes" (click)='onSelect(hero)' [class.selected]='hero === selectedHero'>
     					<span class='badge'>{{hero.id}}</span> {{hero.name}}
     				</li>
     			</ul>
+    			<div *ngIf='selectedHero'>
+    				{{selectedHero.name}}
+    			</div>
     		  `,
     styles: [`
 		  .selected {
@@ -86,6 +89,11 @@ export class AppComponent {
 	
 	title = 'My Heroes' 
 	heroes = HEROES
+	selectedHero : Hero
+
+	onSelect(hero:Hero):void {
+		this.selectedHero = hero
+	}
 
 }
 
