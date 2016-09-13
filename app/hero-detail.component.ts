@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 		      <input [(ngModel)]="hero.name" placeholder="name"/>
 		    </div>
 		    <button (click)="goBack()">Back</button>
+		    <button (click)="save()">Save</button>
 		  </div>
 	`
 })
@@ -46,5 +47,10 @@ export class HeroDetailComponent implements OnInit{
 
 	goBack(): void {
 	    window.history.back();
+	}
+
+	save(): void {
+	  this.heroService.update(this.hero)
+	    .then(this.goBack);
 	}
 }

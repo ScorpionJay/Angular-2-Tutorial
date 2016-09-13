@@ -8,9 +8,17 @@ import { Router } from '@angular/router'
 @Component({
     selector: 'my-heroes',
     template: `
+				<div>
+				  <label>Hero name:</label> <input #heroName />
+				  <button (click)="add(heroName.value); heroName.value=''">
+				    Add
+				  </button>
+				</div>
+
     			<ul class='heroes'>
     				<li *ngFor="let hero of heroes" (click)='onSelect(hero)' [class.selected]='hero === selectedHero'>
     					<span class='badge'>{{hero.id}}</span> {{hero.name}}
+    					<button class="delete" (click)="delete(hero); $event.stopPropagation()">x</button>
     				</li>
     			</ul>
 
@@ -69,6 +77,13 @@ import { Router } from '@angular/router'
 		    margin-right: .8em;
 		    border-radius: 4px 0 0 4px;
 		  }
+		  .delete {
+		  	 float:right;
+			  margin-top: 2px;
+			  margin-right: .8em;
+			  background-color: gray !important;
+			  color:white;
+		  }
 		`]
 		
 
@@ -97,6 +112,25 @@ export class HeroesComponent implements OnInit{
 	gotoDetail():void {
 		let link = ['/detail',this.selectedHero.id]
 		this.router.navigate(link)
+	}
+
+	add(name: string): void {
+	  name = name.trim();
+	  if (!name) { return; }
+	  this.heroService.create(name)
+	    .then(hero => {
+	      this.heroes.push(hero);
+	      this.selectedHero = null;
+	    });
+	}
+
+	delete(hero: Hero): void {
+	  this.heroService
+	      .delete(hero.id)
+	      .then(() => {
+	        this.heroes = this.heroes.filter(h => h !== hero);
+	        if (this.selectedHero === hero) { this.selectedHero = null; }
+	      });
 	}
 }
 
