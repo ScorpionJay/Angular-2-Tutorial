@@ -14,8 +14,13 @@ import { DashboardComponent }  from './dashboard.component'
 
 
 import { HeroService } from './hero.service'
+import { HomeService } from './home/home.service'
 
 import { routing } from './app.routing'
+
+import { HomeComponent }  from './home/home.component'
+import { FindComponent }  from './find/find.component'
+import { MeComponent }  from './me/me.component'
 
 @NgModule({
   imports: [ 
@@ -25,9 +30,13 @@ import { routing } from './app.routing'
   	InMemoryWebApiModule.forRoot(InMemoryDataService),
   	routing
   ],
-  declarations: [ AppComponent,HeroesComponent,HeroDetailComponent,DashboardComponent ],
+  declarations: [ AppComponent,HeroesComponent,HeroDetailComponent,DashboardComponent ,HomeComponent,
+    FindComponent,
+    MeComponent
+  ],
   providers:[
-  	HeroService
+  	HeroService,
+    HomeService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,0 +1,10 @@
+
+nav a{
+	color: #fff;
+	background-color: #000;
+	width: 33%;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	line-height: 30px;
+}
